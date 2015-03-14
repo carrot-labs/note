@@ -5,7 +5,8 @@
   "main": "server/note.js",
   "private": true,
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "jshint": "gulp jshint"
   },
   "author": "Guilherme Rv Coelho <guilherme@cenoura.co>",
   "license": "MIT",
