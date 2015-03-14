@@ -1,0 +1,13 @@
+{
+  "name": "note",
+  "version": "1.0.0",
+  "description": "A note application",
+  "main": "server/note.js",
+  "private": true,
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Guilherme Rv Coelho <guilherme@cenoura.co>",
+  "license": "MIT",
+  "homepage": "https://github.com/cenouraco/note"
+}
