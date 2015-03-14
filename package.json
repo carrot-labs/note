@@ -9,5 +9,11 @@
   },
   "author": "Guilherme Rv Coelho <guilherme@cenoura.co>",
   "license": "MIT",
-  "homepage": "https://github.com/cenouraco/note"
+  "homepage": "https://github.com/cenouraco/note",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jshint": "^1.9.2",
+    "gulp-plumber": "^1.0.0",
+    "jshint-stylish": "^1.0.1"
+  }
 }
