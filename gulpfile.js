@@ -33,6 +33,20 @@ gulp.task('jshint-server', function() {
 }); 
 
 /**
+ * Angular task
+ */
+
+gulp.task('angular', function() {
+  var angularFiles = ['front/app/**/*.js'];
+
+  gulp
+    .src(angularFiles)
+    .pipe(concat('app.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/assets/js/'));
+});
+
+/**
  * Jshint front task
  */
 
@@ -114,7 +128,8 @@ gulp.task('images', function() {
  * Watch task
  */
 
-gulp.task('watch', ['jade', 'stylus', 'scripts', 'images'], function() {
+gulp.task('watch', ['angular', 'jade', 'stylus', 'scripts', 'images'], function() {
+  gulp.watch('front/app/**/*.js', ['angular']);
   gulp.watch('front/**/*.jade', ['jade']);
   gulp.watch('front/assets/styl/**/*.styl', ['stylus']);
   gulp.watch('front/assets/js/**/*.js', ['scripts']);
