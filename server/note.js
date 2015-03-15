@@ -33,7 +33,13 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride());
-app.use(express.static(path.join(__dirname, '../public')));
+
+/**
+ * Sets up the public folder
+ */
+
+var publicFolder = path.join(__dirname, '../public');
+app.use(express.static(publicFolder));
 
 /**
  * Environment configuration
@@ -44,6 +50,30 @@ var env = process.env.NODE_ENV || 'development';
 if(env === 'development') {
   app.use(errorHandler());
 }
+
+/**
+ * Connects to the database
+ */
+
+var db = require('./config/db');
+
+/**
+ * Sets up the api
+ */
+
+var api = {};
+
+api.notebooks = require('./modules/notebooks/routes.js');
+
+/**
+ * Sets up the routes
+ */
+
+app.use('/api/notebooks', api.notebooks);
+
+app.all('*', function(req, res) {
+  res.sendFile(publicFolder + '/index.html');
+});
 
 /**
  * Exports the app
