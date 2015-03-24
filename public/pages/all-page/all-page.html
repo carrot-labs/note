@@ -1,0 +1,35 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+
+<polymer-element name="all-page">
+  <template>
+    <link rel="stylesheet" href="all-page.css">
+
+    <core-header-panel fit>
+      <core-toolbar>
+        <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
+
+        <div flex>All Notebooks</div>
+
+        <paper-menu-button>
+          <paper-icon-button icon="more-vert"></paper-icon-button>
+
+          <paper-dropdown class="dropdown" halign="right"> 
+            <core-menu>
+              <paper-item>
+                <a href="#/settings">Settings</a>
+              </paper-item>
+              <paper-item>
+                <a href="#/feedback">Feedback</a>
+              </paper-item>
+              <paper-item>
+                <a href="#/about">About</a>
+              </paper-item>
+            </core-menu>
+          </paper-dropdown>
+        </paper-menu-button>
+      </core-toolbar>
+    </core-header-panel>
+  </template>
+
+  <script src="all-page.js"></script>
+</polymer-element>

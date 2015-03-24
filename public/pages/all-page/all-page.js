@@ -1,0 +1,3 @@
+Polymer('all-page', {
+
+});

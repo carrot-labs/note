@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+  <title>Note App</title>
+
+  <!-- Meta information -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="favicon.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/main.css">
+
+  <!-- Webcomponents polyfills -->
+  <script src="components/webcomponentsjs/webcomponents.min.js"></script>
+
+  <!-- Polymer elements -->
+  <link rel="import" href="components/font-roboto/roboto.html">
+  <link rel="import" href="components/core-elements/core-elements.html">
+  <link rel="import" href="components/paper-elements/paper-elements.html">
+  <link rel="import" href="components/app-router/app-router.html">
+
+  <!-- Custom Elements -->
+  <link rel="import" href="elements/main-drawer/main-drawer.html">
+</head>
+
+<body>
+
+  <core-drawer-panel>
+  
+    <main-drawer drawer></main-drawer>
+
+    <div main layout vertical>
+
+      <app-router>
+        <app-route path="/" import="pages/all-page/all-page.html"></app-route>
+        <app-route path="/favorites" import="pages/favorites-page/favorites-page.html"></app-route>
+        <app-route path="*" import "pages/all-page/all-page.html"></app-route>
+      </app-router>
+
+    </div>
+  </core-drawer-panel>
+
+</body>
+</html>

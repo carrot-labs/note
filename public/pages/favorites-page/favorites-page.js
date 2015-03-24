@@ -1,0 +1,3 @@
+Polymer('favorites-page', {
+
+});
