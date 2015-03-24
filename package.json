@@ -1,7 +1,7 @@
 {
   "name": "note",
-  "version": "1.0.0",
-  "description": "A note application",
+  "version": "0.0.1",
+  "description": "A Polymer and Node.js notes application",
   "main": "server/note.js",
   "private": true,
   "scripts": {

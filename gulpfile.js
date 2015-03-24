@@ -4,6 +4,7 @@
 
 var gulp = require('gulp');
 
+// var browser    = require('browser-sync');
 var clean      = require('gulp-clean');
 var concat     = require('gulp-concat');
 var imagemin   = require('gulp-imagemin');
@@ -12,6 +13,7 @@ var jeet       = require('jeet');
 var jshint     = require('gulp-jshint');
 var kouto      = require('kouto-swiss');
 var plumber    = require('gulp-plumber');
+// var reload     = require('browser-sync').reload;
 var rupture    = require('rupture');
 var sourcemaps = require('gulp-sourcemaps');
 var stylish    = require('jshint-stylish');
@@ -20,10 +22,10 @@ var uglify     = require('gulp-uglify');
 var watch      = require('gulp-watch');
 
 /**
- * Jshint server task
+ * Jshint task
  */
 
-gulp.task('jshint-server', function() {
+gulp.task('jshint', function() {
   gulp
     .src('server/**/*.js')
     .pipe(plumber())
@@ -31,33 +33,6 @@ gulp.task('jshint-server', function() {
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 }); 
-
-/**
- * Angular task
- */
-
-gulp.task('angular', function() {
-  var angularFiles = ['front/app/**/*.js'];
-
-  gulp
-    .src(angularFiles)
-    .pipe(concat('app.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('public/assets/js/'));
-});
-
-/**
- * Jshint front task
- */
-
-gulp.task('jshint-front', function() {
-  gulp
-    .src('front/**/*.js')
-    .pipe(plumber())
-    .pipe(watch('front/**/*.js'))
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));
-});
 
 /**
  * Server task
@@ -73,24 +48,24 @@ gulp.task('server', function() {
 });
 
 /**
- * Jade task
+ * Reload task
+ *
+ * Reloads the browser
  */
 
-gulp.task('jade', function() {
-  gulp
-    .src('front/**/*.jade')
-    .pipe(plumber())
-    .pipe(jade({pretty: true}))
-    .pipe(gulp.dest('public'));
+gulp.task('reload', function() {
+  reload();
 });
 
 /**
  * Stylus task
+ *
+ * Converts stylus files into css
  */
 
-gulp.task('stylus', function() {
-  gulp
-    .src('front/assets/styl/main.styl')
+gulp.task('stylus', function () {
+  return gulp
+    .src(['public/**/*.styl', '!public/styles/{base,modules}/**/*.styl', '!public/styles/base.styl'])
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(stylus({
@@ -98,40 +73,22 @@ gulp.task('stylus', function() {
       use: [jeet(), kouto(), rupture()]
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('public/assets/css'));
-});
-
-/**
- * Scripts task
- */
-
-gulp.task('scripts', function() {
-  gulp
-    .src('front/assets/js/**/*.js')
-    .pipe(concat('main.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('public/assets/js'));
-});
-
-/**
- * Images task
- */
-
-gulp.task('images', function() {
-  gulp.src('front/assets/img/**/*')
-    .pipe(plumber())
-    .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
-    .pipe(gulp.dest('public/assets/img'));
+    // .pipe(reload({stream: true}))
+    .pipe(gulp.dest('public'));
 });
 
 /**
  * Watch task
  */
 
-gulp.task('watch', ['angular', 'jade', 'stylus', 'scripts', 'images'], function() {
-  gulp.watch('front/app/**/*.js', ['angular']);
-  gulp.watch('front/**/*.jade', ['jade']);
-  gulp.watch('front/assets/styl/**/*.styl', ['stylus']);
-  gulp.watch('front/assets/js/**/*.js', ['scripts']);
-  gulp.watch('front/assets/img/**/*', ['images']);
+gulp.task('watch', ['stylus'], function() {
+  gulp.watch('public/**/*.styl', ['stylus']);
+
+  // gulp.watch('public/**/*.html', ['reload']);
 });
+
+/**
+ * Default task
+ */
+
+gulp.task('default', ['watch']);
